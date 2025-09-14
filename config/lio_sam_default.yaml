@@ -1,8 +1,8 @@
 liorf:
 
   # Topics
-  pointCloudTopic: "points_raw"               # Point cloud data
-  imuTopic: "imu_raw"                         # IMU data
+  pointCloudTopic: "rslidar_points"               # Point cloud data
+  imuTopic: "imu/data"                         # IMU data
   odomTopic: "odometry/imu"                   # IMU pre-preintegration odometry, same frequency as IMU
   gpsTopic: "gps/fixz"                   # GPS odometry topic from navsat, see module_navsat.launch file
 
@@ -23,7 +23,7 @@ liorf:
   savePCDDirectory: "/Downloads/LOAM/"        # in your home folder, starts and ends with "/". Warning: the code deletes "LOAM" folder then recreates it. See "mapOptimization" for implementation
 
   # Sensor Settings
-  sensor: velodyne                            # lidar sensor type, 'velodyne' or 'ouster' or 'livox' or 'robosense'
+  sensor: robosense                            # lidar sensor type, 'velodyne' or 'ouster' or 'livox' or 'robosense'
   N_SCAN: 16                                  # number of lidar channel (i.e., Velodyne/Ouster: 16, 32, 64, 128, Livox Horizon: 6)
   Horizon_SCAN: 1800                          # lidar horizontal resolution (Velodyne:1800, Ouster:512,1024,2048, Livox Horizon: 4000)
   downsampleRate: 1                           # default: 1. Downsample your data if too many points(line). i.e., 16 = 64 / 4, 16 = 16 / 1
@@ -43,14 +43,14 @@ liorf:
 
   # Extrinsics: T_lb (lidar -> imu)
   extrinsicTrans: [0.0, 0.0, 0.0]
-  extrinsicRot: [-1, 0, 0,
-                  0, 1, 0,
-                  0, 0, -1]
+  extrinsicRot: [-1,  0, 0,
+                  0, -1, 0,
+                  0,  0, 1]
 
   # This parameter is set only when the 9-axis IMU is used, but it must be a high-precision IMU. e.g. MTI-680
-  extrinsicRPY: [0, -1, 0,
-                 1, 0, 0,
-                 0, 0, 1]
+  extrinsicRPY: [-1,  0, 0,
+                  0, -1, 0,
+                  0,  0, 1]
 
   # voxel filter paprams
   mappingSurfLeafSize: 0.4                      # default: 0.4 - outdoor, 0.2 - indoor
